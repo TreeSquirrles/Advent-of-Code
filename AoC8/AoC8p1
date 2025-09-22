@@ -1,0 +1,41 @@
+lines = []
+sickDict = {}
+with open("/Users/herky/Desktop/AoC/AoC8/AdventOfCodeDay8.txt", "r") as text:
+    text.seek(0)
+    for line in text:
+        lines.append(line.strip())
+        
+for y, line in enumerate(lines):
+    for x, letter in enumerate(line):
+        if letter != '.':
+            sickDict.setdefault(letter, []).append((x, y))
+            
+h = len(lines)
+w = len(lines[0])
+
+count = 0
+takenSpaces = set()
+
+for frequency in sickDict.keys():
+    if len(sickDict[frequency]) == 1:
+        continue
+    
+    for i, antenna1 in enumerate(sickDict[frequency]):
+        for j in range(i + 1, len(sickDict[frequency])):
+            antenna2 = sickDict[frequency][j]
+            
+            nodeX1 = antenna2[0] - antenna1[0] + antenna2[0]
+            nodeY1 = antenna2[1] - antenna1[1] + antenna2[1]
+            if (0 <= nodeX1 < w) and (0 <= nodeY1 < h) and ((nodeX1, nodeY1) not in takenSpaces):
+                takenSpaces.add((nodeX1, nodeY1))
+                count += 1
+                
+            nodeX2 = antenna1[0] - antenna2[0] + antenna1[0]
+            nodeY2 = antenna1[1] - antenna2[1] + antenna1[1]
+            if (0 <= nodeX2 < w) and (0 <= nodeY2 < h) and ((nodeX2, nodeY2) not in takenSpaces):
+                takenSpaces.add((nodeX2, nodeY2))
+                count += 1
+
+print(*[f"{x}: {y}" for x, y in sickDict.items()], sep="\n")
+print()
+print(count)
