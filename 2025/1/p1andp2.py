@@ -1,16 +1,18 @@
 """
-May not have done it the fastest, but I am sure proud of this solution (:
+May not have done it the fastest, but I am sure proud of this solution (: 
+Could reach O(n) time compexity and O(1) space by not storing everything in a list but whatever
 """
 
-instructions = ()
+instructions = []
 with open("input.txt", "r") as input:
     for instruction in input:
         s = instruction.split()
-        instructions += ((s[0][0], s[0][1:]),)
+        instructions.append([s[0][0], s[0][1:]])
 
 location = 50
 one = 0
 two = 0
+
 
 def spin(tup):
     global location, one, two
