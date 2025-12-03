@@ -1,3 +1,7 @@
+import time
+
+start = time.perf_counter()
+
 lines = []
 with open("input.txt", "r") as input:
     for line in input:
@@ -24,3 +28,7 @@ for line in lines:
     two += num
 
 print(two)
+
+end = time.perf_counter()
+
+print(f"runtime: {round(end - start, 4)} seconds")
