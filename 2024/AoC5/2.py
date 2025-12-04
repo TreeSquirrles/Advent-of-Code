@@ -1,3 +1,20 @@
+"""
+The stupidest meta solution ever
+
+It isn't even faster than a normal comparison sorting general solution
+
+But it's so funny that I can't not solve it this way
+
+Leave it to the puzzle creator to create a relation space that looks the way it does.
+
+I know "relation space" isn't the actual correct term or whatever but who cares.
+
+Run interesting.py on the puzzle specific inputs to see something very interesting about sorted and unsorted elements. 
+"""
+
+import time
+
+start_time = time.perf_counter()
 rules = {}
 pages = []
 chunks = []
@@ -11,30 +28,39 @@ for rule in chunks[0].split("\n"):
 for page in chunks[1].split("\n"):
     pages.append([int(a) for a in page.split(",")])
 
-"""
-Loop through starting from beginning. List all numbers that exsist that it needs to come before.
+sum = 0
 
-do the same for all other numbers.
-Take the one with middle number of relations, all of them. Link them up, and then find the top one. That one is your middle. 
-
-I took a look at the relations, it appears that all the relation lengths are different... woah that makes it very simple.
-
-so, given a list of un sorted elements, find the middle element. 
-"""
-
-print("pages")
-print(pages)
+def out_of_place(arr, n, d):
+    l = len(arr)
+    if arr[l - d - 1 ] != n:
+        return True
+    return False
+    
 for i in range(len(pages)):
-    print("break! ----------------")
-    for n in pages[i]:
+    nums = pages[i]
+    numsl = len(nums)
+    ok = False
+    to_add = 0
+    for n in nums:
         rule = rules.get(n)
-        d = []
-        if rule:
+        d = 0
+        if rule: #append all elements that relate to this set
             for r in rule:
-                if r in pages[i]:
-                    d.append(r)
-            print(f"{n}: {d}")
-            d = []
-        else:
-            print(f"{n}: []")
+                if r in nums:
+                    d += 1
 
+        if d == len(nums)//2:
+            to_add = n
+        if out_of_place(nums, n, d): #if the place of the number doesn't equal the expected sorted position
+            ok = True
+
+    if ok:
+        sum += to_add
+        to_add = 0
+        ok = False
+
+print(sum)
+
+end_time = time.perf_counter()
+
+print(f"runtime {end_time - start_time}")
