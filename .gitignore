@@ -24,3 +24,5 @@ Thumbs.db # Windows specific
 .vscode/
 .idea/
 *.swp # Vim swap files
+
+input.txt

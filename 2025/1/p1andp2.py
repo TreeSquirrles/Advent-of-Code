@@ -6,7 +6,7 @@ Could reach O(n) time compexity and O(1) space by not storing everything in a li
 instructions = []
 with open("input.txt", "r") as input:
     for instruction in input:
-        s = instruction.split()
+        s = instruction.split() 
         instructions.append([s[0][0], s[0][1:]])
 
 location = 50
