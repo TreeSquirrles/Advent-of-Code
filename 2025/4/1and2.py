@@ -1,3 +1,7 @@
+import time
+
+
+start = time.perf_counter()
 lines = []
 
 with open("input.txt", "r") as input:
@@ -16,7 +20,6 @@ def lessThanAmountNeighbors(x, y, amt):
     topEdge = y == 0
     bottomEdge = y == rows - 1
     c = 0
-# left
     if not leftEdge:
         if not topEdge:
             c += 1 if lines[y-1][x-1] == "@" else 0
@@ -54,6 +57,7 @@ while True:
     if u == 0:
         break
     t += u
-        
 print(t)
+end = time.perf_counter()
 
+print(f"runtime: {end - start} seconds")
