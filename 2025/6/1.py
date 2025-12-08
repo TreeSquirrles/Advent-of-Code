@@ -1,4 +1,5 @@
 import sys
+
 D = sys.stdin.read()
 
 A = []
@@ -14,7 +15,7 @@ for l in range(len(A[:-1])):
     A[l] = [a for a in map(int, A[l])]
 
 for i in range(len(A[0])):
-    op = A[-1][i] 
+    op = A[-1][i]
     s = 0
     ok = True
     for n in range(len(A) - 1):
@@ -28,7 +29,4 @@ for i in range(len(A[0])):
     p1 += s
 
 print(p1)
-            
-            
-
 

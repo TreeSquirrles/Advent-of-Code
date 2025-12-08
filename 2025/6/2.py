@@ -1,12 +1,6 @@
 import sys
 
-D = sys.stdin.read()
-
-D = D.split("\n")[:-1]
-
-A = []
-for line in D:
-    A.append(line)
+A = sys.stdin.read().splitlines()
 
 G = []
 
@@ -22,13 +16,10 @@ G.append([A[-1][point:]])
 for l in A[-2::-1]:
     G[len(G)-1].insert(0, l[point:])
 
-print(G)
-
 p2 = 0
 
 for group in G:
     op = group[-1][0]
-    print(op)
     temp = 0
     ok = True
     for i in range(len(group[0])-1 , -1, -1):
@@ -44,7 +35,6 @@ for group in G:
                 ok = False
             temp *= int(calcnum)
 
-    print(temp)
     p2 += temp
 
 print(p2)
